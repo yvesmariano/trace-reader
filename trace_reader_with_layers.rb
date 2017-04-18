@@ -70,5 +70,5 @@ File.open("traces/" + file, "r").each_line do |line|
 end
 
 hitrate = (hit * 1.0 / acessos)* 100;
-puts "Total de acessos: #{acesso}\nHit: #{hit}\nMiss: #{miss}"
+puts "Total de acessos: #{acessos}\nHit: #{hit}\nMiss: #{miss}"
 puts "Hit rate: %.2f%" % hitrate
