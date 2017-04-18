@@ -37,14 +37,14 @@ puts "Quantas colunas?"
 words = gets.to_i
 puts "Qual arquivo de trace deseja ler?"
 file = gets.chomp
-puts "Lendo #{file}.trace ..."
+puts "Lendo #{file} ..."
 memory = CacheMemory.new size
 bits_size, bits_words = Math.log2(size).to_i, Math.log2(words).to_i
 
-File.open("traces/" + file + ".trace", "r").each_line do |line|
-#	if line[0] == 2 then
-#		line = line[2,8].rjust(8,'0')
-		line = line[4,8]
+File.open("traces/" + file, "r").each_line do |line|
+	if line[0] == '2' then
+		line = line[2,8].rjust(8,'0')
+#		line = line[4,8]
 		tag = hex2bin(line)[0,32-bits_words]
 		index = tag.slice(-bits_size,bits_size).to_i(2)
 		if(memory.is_valid(index) and memory.get(index) == tag) then
@@ -58,7 +58,7 @@ File.open("traces/" + file + ".trace", "r").each_line do |line|
 		  history.push hitrate
 		end
 		acesso += 1
-#	end
+	end
 end
 
 hitrate = (hit * 1.0 / (miss + hit))*100;
